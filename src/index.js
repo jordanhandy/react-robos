@@ -1,12 +1,19 @@
+// React base
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import 'tachyons';
+// Destructured import, as we are not exporting
+// the "default" as done prior, so must de-structure
+// and declare what we are exporting
 import reportWebVitals from './reportWebVitals';
 
+// React render the DOM Tree
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+  <App />
+
   </React.StrictMode>,
   document.getElementById('root')
 );
