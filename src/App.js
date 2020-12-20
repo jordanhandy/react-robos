@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import CardList from "./CardList";
 import SearchBox from "./SearchBox";
+import Scroll from "./Scroll";
 import "./App.css";
 
 // Basic construct of State in react
@@ -63,7 +64,9 @@ class App extends Component {
           {/* the onSearchChange prop is sent to the searchBox */}
           <SearchBox searchChange={this.onSearchChange} />
           {/* instead of a constant list of 10 robots, you then set the value of robots to be the list of filteredRobots */}
-          <CardList robots={filteredRobots} />
+          <Scroll>
+            <CardList robots={filteredRobots} />
+          </Scroll>
         </div>
       );
     }
