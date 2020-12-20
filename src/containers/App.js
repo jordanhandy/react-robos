@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
 import Scroll from "../components/Scroll";
+// Error Boundary introduced in React 16
+import ErrorBoundry from "../components/ErrorBoundary";
 import "./App.css";
 
 // Basic construct of State in react
@@ -52,25 +54,26 @@ class App extends Component {
     const { robots, searchfield } = this.state;
     // your constant then becomes a filtered list of robots, based on what is put into the searchfield
     const filteredRobots = robots.filter((robot) => {
-      return robot.name
-        .toLowerCase()
-        .includes(searchfield.toLowerCase());
+      return robot.name.toLowerCase().includes(searchfield.toLowerCase());
     });
     // ternary operator.  If robots.length is equal to 0, display "Loading..."
     // if not, display the robots
-      return !robots.length ?
-      <h1>Loading...</h1> :
-      (
-        <div className="tc">
-          <h1 className="f1">RoboFriends</h1>
-          {/* the onSearchChange prop is sent to the searchBox */}
-          <SearchBox searchChange={this.onSearchChange} />
-          {/* instead of a constant list of 10 robots, you then set the value of robots to be the list of filteredRobots */}
+    return !robots.length ? (
+      <h1>Loading...</h1>
+    ) : (
+      <div className="tc">
+        <h1 className="f1">RoboFriends</h1>
+        {/* the onSearchChange prop is sent to the searchBox */}
+        <SearchBox searchChange={this.onSearchChange} />
+        {/* instead of a constant list of 10 robots, you then set the value of robots to be the list of filteredRobots */}
+        {/* Wrap our card list in the Error Boundary to catch if anything went wrong */}
+        <ErrorBoundry>
           <Scroll>
             <CardList robots={filteredRobots} />
           </Scroll>
-        </div>
-      );
-    }
+        </ErrorBoundry>
+      </div>
+    );
   }
+}
 export default App;
