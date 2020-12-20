@@ -49,16 +49,18 @@ class App extends Component {
   };
 
   render() {
+    const { robots, searchfield } = this.state;
     // your constant then becomes a filtered list of robots, based on what is put into the searchfield
-    const filteredRobots = this.state.robots.filter((robot) => {
+    const filteredRobots = robots.filter((robot) => {
       return robot.name
         .toLowerCase()
-        .includes(this.state.searchfield.toLowerCase());
+        .includes(searchfield.toLowerCase());
     });
-    if (this.state.robots.length === 0) {
-      return <h1>Loading...</h1>;
-    } else {
-      return (
+    // ternary operator.  If robots.length is equal to 0, display "Loading..."
+    // if not, display the robots
+      return !robots.length ?
+      <h1>Loading...</h1> :
+      (
         <div className="tc">
           <h1 className="f1">RoboFriends</h1>
           {/* the onSearchChange prop is sent to the searchBox */}
@@ -71,5 +73,4 @@ class App extends Component {
       );
     }
   }
-}
 export default App;
